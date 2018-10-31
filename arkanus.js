@@ -670,7 +670,7 @@ function combine() {
 							currentScreen = "tutorial";
 							document.getElementById("tutText").innerHTML = "From the recipes page, click a rune to see all the combinations " + 
 								"you've tried that begin with that rune. (THIS IS NOT COMPLETE! The recipes page needs a lot of work still.)<br><br>" + 
-								"The first 9 runes can be added to the rune combiner using the keyboard shortcuts (1-9), and then combine using (Spacebar).<br><br>" + 
+								"The first 9 runes can be added to the rune combiner using the keyboard shortcuts (1-9), and then combined using (Spacebar). Remove all runes in the combiner by pressing (X).<br><br>" + 
 								"For a quick boost, try combining 4 of the same rune! This is one of the 5 universal recipes.<br><br>" + 
 								"Try all sorts of combinations to get more powerful runes and bonuses!";
 							document.getElementById("tutorialScreen").style.display = "inline";
