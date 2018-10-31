@@ -51,6 +51,7 @@ var increaseBaseRune = [];		//1, 3, 5, 7		4
 var increaseCritChance = [];	//5, 10, 25, 50		2-4
 var increaseCritMult = [];		//1, 10, 40, 120	4
 var increasePresentMult = [];	//1, 3, 5, 7		4
+var givePresents = [];			//10, 100, 400, 1200 2-4
 
 //Store all the default recipes
 for (i = 0; i < 24; i++) {
@@ -235,6 +236,37 @@ for (i = 0; i < 1; i++) {
 		increasePresentMult.push(newRecipe);
 	} else i--;
 }
+for (i = 0; i < 4; i++) {
+	var r1 = Math.floor(Math.random() * 6); //0 to 5
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		givePresents.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 4; i++) {
+	var r1 = Math.floor(Math.random() * 6); //0 to 5
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var newRecipe = r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		givePresents.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 2; i++) {
+	var r1 = Math.floor(Math.random() * 6); //0 to 5
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var newRecipe = r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		givePresents.push(newRecipe);
+	} else i--;
+}
+
 
 //Recipes using runes 0-11
 for (i = 0; i < 10; i++) {
@@ -404,6 +436,37 @@ for (i = 0; i < 3; i++) {
 		increasePresentMult.push(newRecipe);
 	} else i--;
 }
+for (i = 0; i < 40; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 6; //6 to 11
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		givePresents.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 40; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 6; //6 to 11
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var newRecipe = r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		givePresents.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 20; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 6; //6 to 11
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var newRecipe = r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		givePresents.push(newRecipe);
+	} else i--;
+}
+
 
 
 var debugMode = false;
@@ -782,6 +845,13 @@ function combine() {
 					if (critChance == 1) document.getElementById("header4").style.display = "inline";
 					document.getElementById("critChance").innerHTML = critChance;
 					displayMessage("Crit chance increased by 1%!");
+				} else if (givePresents.includes(recipeID)) {
+					//Give a present!
+					var pres = parseInt(document.getElementById("rune" + highestRune).getAttribute("value"));
+					pres += presentMult;
+					document.getElementById("rune" + highestRune).setAttribute("value", pres);
+					document.getElementById("numRune" + highestRune).innerHTML = enumerate(pres);
+					displayMessage("You got a one-time gift of " + presentMult + " " + getRuneName(highestRune) + " runes!");
 				} else {
 					//Recipe failed
 					combinations--;
@@ -871,6 +941,13 @@ function combine() {
 				if (critChance == 1) document.getElementById("header4").style.display = "inline";
 				document.getElementById("critChance").innerHTML = critChance;
 				displayMessage("Crit chance increased by 1%!");
+			} else if (givePresents.includes(recipeID)) {
+				//Give a present!
+				var pres = parseInt(document.getElementById("rune" + highestRune).getAttribute("value"));
+				pres += presentMult;
+				document.getElementById("rune" + highestRune).setAttribute("value", pres);
+				document.getElementById("numRune" + highestRune).innerHTML = enumerate(pres);
+				displayMessage("You got a one-time gift of " + presentMult + " " + getRuneName(highestRune) + " runes!");
 			} else {
 				//Recipe failed
 				combinations--;
@@ -997,6 +1074,13 @@ function combine() {
 				document.getElementById("header3").style.display = "inline";
 				document.getElementById("totalCombinations").innerHTML = enumerate(combinations);
 				displayMessage("Auto-Combine unlocked!");
+			} else if (givePresents.includes(recipeID)) {
+				//Give a present!
+				var pres = parseInt(document.getElementById("rune" + highestRune).getAttribute("value"));
+				pres += presentMult;
+				document.getElementById("rune" + highestRune).setAttribute("value", pres);
+				document.getElementById("numRune" + highestRune).innerHTML = enumerate(pres);
+				displayMessage("You got a one-time gift of " + presentMult + " " + getRuneName(highestRune) + " runes!");
 			} else {
 				//Recipe failed
 				combinations--;
@@ -1326,9 +1410,16 @@ function closeTutorial() {
 }
 
 function gameWin() {
-	displayMessage("You Win!");
+	prevScreen = "combine";
+	currentScreen = "tutorial";
 	var gameTime = formatTime();
-	displayMessage("It took you " + gameTime + " to complete the game!");
+	document.getElementById("tutText").innerHTML = "Game completed in " + gameTime + "!<br><br>" + 
+	"The full version of the game will include all 24 runes and many more reipies and features!<br><br>" + 
+	"Please contact Nohmou on reddit or discord for information or to leave feedback.";
+	document.getElementById("xButton").style.display = "none";
+	document.getElementById("tutorialScreen").style.display = "inline";
+	//displayMessage("You Win!");
+	//displayMessage("It took you " + gameTime + " to complete the game!");
 }
 
 function formatTime() {
