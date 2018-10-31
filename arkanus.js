@@ -24,7 +24,7 @@ var autoCombineArray = [];
 var autoCombine0;
 var autoCombine1;
 var recipes = [];
-var failedReipes = [];
+var failedRecipes = [];
 var recipeFails = 0;
 var baseRps = 0;
 var rps = 0;
@@ -680,7 +680,7 @@ function combine() {
 	
 	if (selected == 2) {
 		var recipeID = "" + combineArray[0] + "+" + combineArray[1];
-		if (failedReipes.includes(recipeID)) {
+		if (failedRecipes.includes(recipeID)) {
 			displayMessage("Bad recipe!");
 		} else if (!recipes.includes(recipeID) || combineArray[0] == combineArray[1]) {
 			var runeID1 = combineArray[0];
@@ -750,7 +750,7 @@ function combine() {
 				document.getElementById("currentRunes").innerHTML = enumerate(currentRunes);
 				document.getElementById("totalCombinations").innerHTML = enumerate(combinations);
 				
-				if (totalRunes >= 100 && document.getElementById("x1").style.display != "inline") {
+				if (totalRunes >= 200 && document.getElementById("x1").style.display != "inline") {
 					document.getElementById("x1").style.display = "inline";
 					document.getElementById("x2").style.display = "inline";
 					if (tutorialEnabled) {
@@ -804,15 +804,27 @@ function combine() {
 					document.getElementById("x1000").style.display = "inline";
 					if (tutorialEnabled) {
 						prevScreen = "combine";
+						var hint1 = increaseCritMult[2].split("+");
+						var hint2 = increaseCritMult[3].split("+");
+						var hint3 = increaseCritMult[4].split("+");
+						currentScreen = "tutorial";
+						document.getElementById("tutText").innerHTML = "Hintception!<br><br>" + 
+						getRuneName(parseInt(hint1[0])) + "+" + getRuneName(parseInt(hint1[1])) + "+" + getRuneName(parseInt(hint1[2])) + "+" + getRuneName(parseInt(hint1[3])) + "!<br><br>" + 
+						getRuneName(parseInt(hint2[0])) + "+" + getRuneName(parseInt(hint2[1])) + "+" + getRuneName(parseInt(hint2[2])) + "+" + getRuneName(parseInt(hint2[3])) + "!<br><br>" + 
+						getRuneName(parseInt(hint3[0])) + "+" + getRuneName(parseInt(hint3[1])) + "+" + getRuneName(parseInt(hint3[2])) + "+" + getRuneName(parseInt(hint3[3])) + "!";
+						document.getElementById("tutorialScreen").style.display = "inline";
+					}
+				}
+				if (totalRunes >= 10000000 && document.getElementById("x10000").style.display != "inline") {
+					document.getElementById("x10000").style.display = "inline";
+					if (tutorialEnabled) {
+						prevScreen = "combine";
 						currentScreen = "tutorial";
 						document.getElementById("tutText").innerHTML = "Those last few hints should probably have been enough for the current version. " + 
 						"If you're this far and haven't used them, do so! They'll increase the strength of many other recipes!<br><br>" + 
 						"If you really used them and are still struggling, let me know on reddit/discord, so I can fix the game's balance.";
 						document.getElementById("tutorialScreen").style.display = "inline";
 					}
-				}
-				if (totalRunes >= 10000000 && document.getElementById("x10000").style.display != "inline") {
-					document.getElementById("x10000").style.display = "inline";
 				}
 				if (totalRunes >= 100000000 && document.getElementById("x100000").style.display != "inline") {
 					document.getElementById("x100000").style.display = "inline";
@@ -863,7 +875,7 @@ function combine() {
 				} else {
 					//Recipe failed
 					combinations--;
-					failedReipes.push(recipeID);
+					failedRecipes.push(recipeID);
 					recipeFails++;
 					displayMessage("Recipe Failed!");
 				}
@@ -874,7 +886,7 @@ function combine() {
 		} 
 	} else if (selected == 3) {
 		var recipeID = "" + combineArray[0] + "+" + combineArray[1] + "+" + combineArray[2];
-		if (failedReipes.includes(recipeID)) {
+		if (failedRecipes.includes(recipeID)) {
 			displayMessage("Bad recipe!");
 		} else if (!recipes.includes(recipeID)) {
 			recipes.push(recipeID);
@@ -959,7 +971,7 @@ function combine() {
 			} else {
 				//Recipe failed
 				combinations--;
-				failedReipes.push(recipeID);
+				failedRecipes.push(recipeID);
 				recipeFails++;
 				displayMessage("Recipe Failed!");
 			}
@@ -969,7 +981,7 @@ function combine() {
 		}
 	} else if (selected == 4) {
 		var recipeID = "" + combineArray[0] + "+" + combineArray[1] + "+" + combineArray[2] + "+" + combineArray[3];
-		if (failedReipes.includes(recipeID)) {
+		if (failedRecipes.includes(recipeID)) {
 			displayMessage("Bad recipe!");
 		} else if (!recipes.includes(recipeID)) {
 			recipes.push(recipeID);
@@ -1075,7 +1087,8 @@ function combine() {
 				//Increase the Present Multiplier
 				presentMult *= 5;
 				document.getElementById("presentMult").innerHTML = presentMult;
-				displayMessage("Present Multiplier increased by 10x!");
+				document.getElementById("header4").style.display = "inline";
+				displayMessage("Present Multiplier increased by 5x!");
 			} else if (val1 == 0 && val2 == 1 && val3 == 2 && val4 == 3) {
 				//Auto Combo!
 				document.getElementById("autoCombine").style.display = "inline";
@@ -1092,7 +1105,7 @@ function combine() {
 			} else {
 				//Recipe failed
 				combinations--;
-				failedReipes.push(recipeID);
+				failedRecipes.push(recipeID);
 				recipeFails++;
 				displayMessage("Recipe Failed!");
 			}
@@ -1430,7 +1443,7 @@ function saveGame() {
 		highestRune : highestRune,
 		combineArray : combineArray,
 		recipes : recipes,
-		failedReipes : failedReipes,
+		failedRecipes : failedRecipes,
 		recipeFails : recipeFails,
 		baseRps : baseRps,
 		rps : rps,
@@ -1495,7 +1508,7 @@ function loadGame() {
 		if (typeof save.highestRune != "undefined") highestRune = save.highestRune;
 		if (typeof save.combineArray != "undefined") combineArray = save.combineArray;
 		if (typeof save.recipes != "undefined") recipes = save.recipes;
-		if (typeof save.failedReipes != "undefined") failedReipes = save.failedReipes;
+		if (typeof save.failedRecipes != "undefined") failedRecipes = save.failedRecipes;
 		if (typeof save.recipeFails != "undefined") recipeFails = save.recipeFails;
 		if (typeof save.baseRps != "undefined") baseRps = save.baseRps;
 		if (typeof save.rps != "undefined") rps = save.rps;
@@ -1565,7 +1578,7 @@ function loadGame() {
 		document.getElementById("critMult").innerHTML = critMult;
 		document.getElementById("presentMult").innerHTML = presentMult;
 		if (totalRunes >= 10) document.getElementById("combine").style.display = "inline";
-		if (totalRunes >= 100) {
+		if (totalRunes >= 200) {
 			document.getElementById("x1").style.display = "inline";
 			document.getElementById("x2").style.display = "inline";
 		}
@@ -1599,12 +1612,15 @@ function gameWin() {
 	currentScreen = "tutorial";
 	var gameTime = formatTime();
 	document.getElementById("tutText").innerHTML = "Game completed in " + gameTime + "!<br><br>" + 
+	"You discovered " + (recipes.length - failedRecipes.length) + " recipes out of a total " + allRecipes.length + "!<br><br>" + 
 	"The full version of the game will include all 24 runes and many more reipies and features!<br><br>" + 
 	"Please contact Nohmou on reddit or discord for information or to leave feedback.";
 	document.getElementById("xButton").style.display = "none";
 	document.getElementById("tutorialScreen").style.display = "inline";
 	//displayMessage("You Win!");
 	//displayMessage("It took you " + gameTime + " to complete the game!");
+	rps = 0;
+	autoCombining = false;
 }
 
 function formatTime() {
@@ -1623,7 +1639,6 @@ function formatTime() {
 	if (minutes < 10) minutes = "0" + minutes;
 	if (hours < 10) hours = "0" + hours;
 	if (days < 10) days = "0" + days;
-	console.log(days + ":" + hours + ":" + minutes + ":" + seconds);
 	return "" + days + ":" + hours + ":" + minutes + ":" + seconds;
 }
 
