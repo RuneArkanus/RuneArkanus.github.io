@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Arkanus</title>
+		<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="arkanus.js"></script>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<meta charset="utf-8" />
+	</head>
+
+	<body>
+		<div id="header1">
+			Current Runes: <span id="currentRunes">0</span><br>
+			Combinations: <span id="totalCombinations">0</span><br>
+			Recipes: <span id="totalRecipes">0</span>
+		</div>
+		
+		<div id="header2">
+			Altar Multiplier: <span id="altarMultiplier">1</span><br>
+			Combine Multiplier: <span id="combineMultiplier">1</span><br>
+			Runes per second: <span id="rps">0</span>
+		</div>
+		
+		<div class="hidden" id="header3">
+			Base Rune: <span id="baseRune">Aat</span><br>
+			Auto Speed: <span id="combineSpeed">1</span><br>
+			Combine Base: <span id="combineBase">Aat</span>
+		</div>
+		
+		<div class="hidden" id="header4">
+			Crit Chance: <span id="critChance">0</span>%<br>
+			Crit Multiplier: <span id="critMult">2</span><br>
+			Present Multiplier: <span id="presentMult">10</span>
+		</div>
+	
+		<div id="buttons">
+			<button class="button" id="altar" onclick="goAltar()">Altar</button>
+			<button class="button hidden" id="combine" onclick="goCombine()">Combine</button>
+			<button class="button hidden" id="recipe" onclick="goRecipe()">Recipes</button><br>
+			<button class="button" id="version" onclick="goVersion()">Version 0.1</button>
+		</div>
+	
+		<div id="leftRunes">
+			<div class="tooltip">
+				<image class="rune" id="rune0" type="image" src="images/unknownRune.png" onclick="selectRune(0)" />
+				<span class="tooltiptext hidden" id="text0">Aat, the first rune.<br>Requires 1 rune to combine.</span>
+			</div>
+			<div class="tooltip">
+				<image class="rune" id="rune1" type="image" src="images/unknownRune.png" onclick="selectRune(1)">
+				<span class="tooltiptext hidden" id="text1">Ain<br>Requires 4 runes to combine.</span>
+				</image>
+			</div>
+			<div class="tooltip">
+				<image class="rune" id="rune2" type="image" src="images/unknownRune.png" onclick="selectRune(2)"> 
+				<span class="tooltiptext hidden" id="text2">Ald<br>Requires 9 runes to combine.</span>
+				</image>
+			</div>
+			<br><span class="col1" id="numRune0">0</span><span class="col2" id="numRune1">0</span><span class="col3" id="numRune2">0</span><br>
+			<div class="tooltip">
+				<image class="rune" id="rune3" type="image" src="images/unknownRune.png" onclick="selectRune(3)">
+				<span class="tooltiptext hidden" id="text3">Ang<br>Requires 16 runes to combine.</span>
+				</image>
+			</div>
+			<div class="tooltip">
+				<image class="rune" id="rune4" type="image" src="images/unknownRune.png" onclick="selectRune(4)">
+				<span class="tooltiptext hidden" id="text4">Ath<br>Requires 25 runes to combine.</span>
+				</image>
+			</div>
+			<div class="tooltip">
+				<image class="rune" id="rune5" type="image" src="images/unknownRune.png" onclick="selectRune(5)">
+				<span class="tooltiptext hidden" id="text5">Eds<br>Requires 36 runes to combine.</span>
+				</image>
+			</div>
+			<br><span class="col1" id="numRune3">0</span><span class="col2" id="numRune4">0</span><span class="col3" id="numRune5">0</span><br>
+			<div class="tooltip2">
+				<image class="rune" id="rune6" type="image" src="images/unknownRune.png" onclick="selectRune(6)">
+				<span class="tooltiptext2 hidden" id="text6">Een<br>Requires 49 runes to combine.</span>
+				</image>
+			</div>
+			<div class="tooltip2">
+				<image class="rune" id="rune7" type="image" src="images/unknownRune.png" onclick="selectRune(7)">
+				<span class="tooltiptext2 hidden" id="text7">Eft<br>Requires 64 runes to combine.</span>
+				</image>
+			</div>
+			<div class="tooltip2">
+				<image class="rune" id="rune8" type="image" src="images/unknownRune.png" onclick="selectRune(8)">
+				<span class="tooltiptext2 hidden" id="text8">Ery<br>Requires 81 runes to combine.</span>
+				</image>
+			</div>
+			<br><span class="col1" id="numRune6">0</span><span class="col2" id="numRune7">0</span><span class="col3" id="numRune8">0</span><br>
+			<div class="tooltip2">
+				<image class="rune" id="rune9" type="image" src="images/unknownRune.png" onclick="selectRune(9)">
+				<span class="tooltiptext2 hidden" id="text9">Ewl<br>Requires 100 runes to combine.</span>
+				</image>
+			</div>
+			<div class="tooltip2">
+				<image class="rune" id="rune10" type="image" src="images/unknownRune.png" onclick="selectRune(10)">
+				<span class="tooltiptext2 hidden" id="text10">Ibb<br>Requires 121 runes to combine.</span>
+				</image>
+			</div>
+			<div class="tooltip2">
+				<image class="rune" id="rune11" type="image" src="images/unknownRune.png" onclick="selectRune(11)">
+				<span class="tooltiptext2 hidden" id="text11">Ing<br>Requires 144 runes to combine.</span>
+				</image>
+			</div>
+			<br><span class="col1" id="numRune9">0</span><span class="col2" id="numRune10">0</span><span class="col3" id="numRune11">0</span>
+		</div>
+	
+		<image id="runeAltar" type="image" src="images/runeAltara.png" onclick="makeRune(0)" />
+		
+		<div class="hidden" id="combineAltar">
+			<button class="hidden" id="autoCombine" onclick="toggleAuto()">Auto-Combine: <span id="combining">OFF</span></button>
+			<image class="combineRune" id="combine0" src="images/blankRune.png" onclick="removeRune(0)" />
+			<image class="combineRune" id="combine1" src="images/blankRune.png" onclick="removeRune(1)" />
+			<image class="combineRune" id="combine2" src="images/blankRune.png" onclick="removeRune(2)" />
+			<image class="combineRune" id="combine3" src="images/blankRune.png" onclick="removeRune(3)" />
+			<button id="combineButton" onclick="combine()">Combine</button>
+			<div id="message">
+				<center><span id="mess"></span></center>
+			</div>
+			<div id="message2">
+				<center><span id="mess2"></span></center>
+			</div>
+			<button class="combineX hidden" id="x1" onclick="setCombine(1)">1x</button>
+			<button class="combineX hidden" id="x2" onclick="setCombine(2)">2x</button>
+			<button class="combineX hidden" id="x5" onclick="setCombine(5)">5x</button>
+			<button class="combineX hidden" id="x10" onclick="setCombine(10)">10x</button>
+			<button class="combineX2 hidden" id="x100" onclick="setCombine(100)">100x</button>
+			<button class="combineX2 hidden" id="x1000" onclick="setCombine(1000)">1000x</button>
+			<button class="combineX2 hidden" id="x10000" onclick="setCombine(10000)">10000x</button>
+			<button class="combineX2 hidden" id="x100000" onclick="setCombine(100000)">100000x</button>
+		</div>
+	
+		<div id="rightRunes">
+			<div class="tooltip">
+				<image class="rune" id="rune12" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext hidden">Irq</span>
+				</image>
+			</div>
+			<div class="tooltip">
+				<image class="rune" id="rune13" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext hidden">Isk</span>
+				</image>
+			</div>
+			<div class="tooltip">
+				<image class="rune" id="rune14" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext hidden">Ivl</span>
+				</image>
+			</div>
+			<br><span class="col1" id="numRune12">0</span><span class="col2" id="numRune13">0</span><span class="col3" id="numRune14">0</span><br>
+			<div class="tooltip">
+				<image class="rune" id="rune15" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext hidden">Och</span>
+				</image>
+			</div>
+			<div class="tooltip">
+				<image class="rune" id="rune16" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext hidden">Ont</span>
+				</image>
+			</div>
+			<div class="tooltip">
+				<image class="rune" id="rune17" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext hidden">Opp</span>
+				</image>
+			</div>
+			<br><span class="col1" id="numRune15">0</span><span class="col2" id="numRune16">0</span><span class="col3" id="numRune17">0</span><br>
+			<div class="tooltip2">
+				<image class="rune" id="rune18" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext2 hidden">Ort</span>
+				</image>
+			</div>
+			<div class="tooltip2">
+				<image class="rune" id="rune19" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext2 hidden">Ox</span>
+				</image>
+			</div>
+			<div class="tooltip2">
+				<image class="rune" id="rune20" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext2 hidden">Ugh</span>
+				</image>
+			</div>
+			<br><span class="col1" id="numRune18">0</span><span class="col2" id="numRune19">0</span><span class="col3" id="numRune20">0</span><br>
+			<div class="tooltip2">
+				<image class="rune" id="rune21" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext2 hidden">Ujl</span>
+				</image>
+			</div>
+			<div class="tooltip2">
+				<image class="rune" id="rune22" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext2 hidden">Url</span>
+				</image>
+			</div>
+			<div class="tooltip2">
+				<image class="rune" id="rune23" type="image" src="images/unknownRune.png">
+				<span class="tooltiptext2 hidden">Uzn</span>
+				</image>
+			</div>
+			<br><span class="col1" id="numRune21">0</span><span class="col2" id="numRune22">0</span><span class="col3" id="numRune23">0</span>
+		</div>
+	
+		<div class="hidden" id="recipeScreen">
+			<button id="successes" onclick="showSuccesses()">Successes</button>
+			<button id="failures" onclick="showFailures()">Failures</button>
+			<p id="log">
+			</p>
+		</div>
+	
+		<div class="screen hidden" id="tutorialScreen">
+			<div id="xButton" onclick="closeTutorial()">X</div>
+			Text!
+		</div>
+		
+		<div class="screen hidden" id="versionScreen">
+			<center>Version 0.1</center><br>
+			Base game mostly completed. Todo: <br>
+			Add right side.<br>
+			Add save/load functionality.<br>
+			Add additional recipies.<br>
+			Finish recipe display.<br>
+			Finish rune tooltips.<br>
+			Add end screen.<br>
+			Add tutorial.<br>
+			Add achievements/stats.<br>
+			
+		</div>
+		
+	</body>
+</html>
+
+<!-- Copyright Nohmou, 2018 -->

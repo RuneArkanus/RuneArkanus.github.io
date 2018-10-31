@@ -1,0 +1,384 @@
+/* #id
+	.class
+*/
+
+body {
+	background-color: grey;
+	width: 100%;
+	height: 100%;
+}
+
+.hidden {
+	display: none;
+}
+
+#header1 {
+	position: absolute;
+	width: 15%;
+	height: 8%;
+	border-style: solid;
+	border-width: 1px;
+}
+
+#header2 {
+	position: absolute;
+	width: 15%;
+	height: 8%;
+	left: 16%;
+	border-style: solid;
+	border-width: 1px;
+}
+
+#header3 {
+	position: absolute;
+	width: 15%;
+	height: 8%;
+	left: 31.5%;
+	border-style: solid;
+	border-width: 1px;
+}
+
+#header4 {
+	position: absolute;
+	width: 15%;
+	height: 8%;
+	left: 47%;
+	border-style: solid;
+	border-width: 1px;
+}
+
+#buttons {
+	position: absolute;
+	width: 32%;
+	height: 8%;
+	border-style: solid;
+	border-width: 1px;
+	right: 0%;
+}
+
+.button {
+	outline-style: none;
+	width: 32%;
+	border-radius: 12px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#leftRunes {
+	position: absolute;
+	background-color: blue;
+	width: 32%;
+	height: 89%;
+	top: 10%;
+	padding-left: 3px;
+	padding-right: 3px;
+	opacity: 0.99;
+}
+
+#rightRunes {
+	position: absolute;
+	background-color: blue;
+	width: 32%;
+	height: 89%;
+	top: 10%;
+	right: 0%;
+	padding-left: 3px;
+}
+
+#runeAltar {
+	position: absolute;
+	width: 24%;
+	height: 42%;
+	top: 33%;
+	left: 38.5%;
+}
+
+#combineAltar {
+	position: absolute;
+	background-color: purple;
+	width: 30%;
+	height: 50%;
+	top: 25%;
+	left: 35.5%;
+}
+
+.rune {
+	outline-style: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border-width: 1px;
+	height: 90%;
+	opacity: 0.99;
+}
+
+.combineRune {
+	outline-style: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	height: 32%;
+	width: 32%;
+}
+
+#combine1 {
+	position: absolute;
+	right: 0%;
+}
+
+#combine2 {
+	position: absolute;
+	left: 0%;
+	bottom: 0%;
+	display: none;
+}
+
+#combine3 {
+	position: absolute;
+	right: 0%;
+	bottom: 0%;
+	display: none;
+}
+
+#combineButton {
+	outline-style: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: absolute;
+	width: 80%;
+	height: 20%;
+	border-radius: 12px;
+	left: 10%;
+	top: 105%;
+	font-size: 275%;
+}
+
+.combineX {
+	outline-style: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: absolute;
+	width: 20%;
+	height: 10%;
+	top: 125%;
+	background-color: red;
+	border-color: red;
+}
+
+#x1 {
+	left: 10%;
+	background-color: green;
+	border-color: green;
+}
+
+#x2 {
+	left: 30%;
+}
+
+#x5 {
+	left: 50%;
+}
+
+#x10 {
+	left: 70%;
+}
+
+.combineX2 {
+	outline-style: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: absolute;
+	width: 20%;
+	height: 10%;
+	top: 135%;
+	background-color: red;
+	border-color: red;
+}
+
+#x100 {
+	left: 10%;
+}
+
+#x1000 {
+	left: 30%;
+}
+
+#x10000 {
+	left: 50%;
+}
+
+#x100000 {
+	left: 70%;
+}
+
+#autoCombine {
+	outline-style: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: absolute;
+	width: 80%;
+	height: 20%;
+	border-radius: 12px;
+	left: 10%;
+	top: -25%;
+	font-size: 125%;
+}
+
+#message {
+	position: absolute;
+	left: 15%;
+	top: 45%;
+	width: 70%;
+	height: 40%;
+	font-size: 100%;
+}
+
+#message2 {
+	position: absolute;
+	left: 15%;
+	top: 50%;
+	width: 70%;
+	height: 40%;
+	font-size: 100%;
+}
+
+.col1 {
+	position: absolute;
+	left: 15%;
+}
+
+.col2 {
+	position: absolute;
+	left: 48%;
+}
+
+.col3 {
+	position: absolute;
+	left: 81%;
+}
+
+#recipeScreen {
+	position: absolute;
+	background-color: green;
+	width: 35%;
+	height: 89%;
+	top: 10%;
+	left: 33%;
+}
+
+#log {
+	position: absolute;
+	width: 98%;
+	height: 77%;
+	top: 20%;
+	padding-left: 5px;
+	overflow-y: scroll;
+	max-height: 96%;
+}
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+	width: 32.5%;
+	height: 22%;
+	z-index: auto;
+}
+
+.tooltip2 {
+	position: relative;
+	display: inline-block;
+	width: 32.5%;
+	height: 22%;
+	z-index: auto;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	background-color: black;
+	color: #fff;
+	width: 90%;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px;
+	top: 115%;
+	left: 2.5%;
+	position: absolute;
+}
+
+.tooltip2 .tooltiptext2 {
+	visibility: hidden;
+	background-color: black;
+	color: #fff;
+	width: 100px;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px;
+	bottom: 100%;
+	left: 2.5%;
+	position: absolute;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	z-index: 5;
+}
+
+.tooltip2:hover .tooltiptext2 {
+	visibility: visible;
+	z-index: 5;
+}
+
+#tutorialScreen {
+	position: absolute;
+	left: 10%;
+	top: 10%;
+	width: 75%;
+	height: 75%;
+	z-index: 2;
+	background-color: black;
+	color: white;
+	font-size: 24px;
+}
+
+#versionScreen {
+	position: absolute;
+	width: 100%;
+	height: 89%;
+	left: 0%;
+	top: 10%;
+	background-color: black;
+	color: white;
+	z-index: 5;
+	font-size: 36px;
+}
+
+#xButton {
+	position: absolute;
+	left: 96%;
+	top: 0%;
+	height: 5%;
+	width: 3%;
+	background-color: red;
+	text-align: right;
+	padding-right: 10px;
+	padding-top: 4px;
+	user-select: none;
+	color: black;
+	font-size: 14px;
+}
+
+#xButton:hover {
+	background-color: orange;
+}
