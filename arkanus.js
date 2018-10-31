@@ -12,7 +12,8 @@ var totalRecipes = 0;
 var time = 0;
 var altarMultiplier = 1;
 var combineMultiplier = 1;
-var currentScreen = "altar";
+var currentScreen = "tutorial";
+var prevScreen = "altar";
 var selected = 0;
 var autoSelected = 0;
 var maxSelected = 2;
@@ -38,6 +39,7 @@ var fading = false;
 var fading2 = false;
 var messages = [];
 var tooltipsOn = true;
+var tutorialEnabled = true;
 
 var allRecipes = [];
 var increaseCombineMult = [];	//3, 15, 60, 180	3-4
@@ -448,6 +450,16 @@ function makeRune(num, base) {
 		document.getElementById("combine").style.display = "inline";
 		document.getElementById("combine").style.backgroundColor = "yellow";
 		document.getElementById("combine").style.borderColor = "yellow";
+		if (tutorialEnabled) {
+			prevScreen = "altar";
+			currentScreen = "tutorial";
+			document.getElementById("tutText").innerHTML = "The rune combiner is a Runesmith's most powerful tool.<br>" + 
+				"There are hundreds of combinations to discover, but some are universal.<br>" + 
+				"Combining two of the same rune, for example, will always produce one of the next tier of rune.<br><br>" + 
+				"Click the \"Combine\" button to access the combiner, or use the keyboard shortcut (C).<br>" + 
+				"You can return to the Altar at any time by pressing its button or using the keyboard shortcut (A).";
+			document.getElementById("tutorialScreen").style.display = "inline";
+		}
 	}
 }
 
@@ -653,6 +665,16 @@ function combine() {
 						document.getElementById("combine2").style.display = "inline";
 						document.getElementById("combine3").style.display = "inline";
 						maxSelected = 4;
+						if (tutorialEnabled) {
+							prevScreen = "combine";
+							currentScreen = "tutorial";
+							document.getElementById("tutText").innerHTML = "From the recipes page, click a rune to see all the combinations " + 
+								"you've tried that begin with that rune. (THIS IS NOT COMPLETE! The recipes page needs a lot of work still.)<br><br>" + 
+								"The first 9 runes can be added to the rune combiner using the keyboard shortcuts (1-9), and then combine using (Spacebar).<br><br>" + 
+								"For a quick boost, try combining 4 of the same rune! This is one of the 5 universal recipes.<br><br>" + 
+								"Try all sorts of combinations to get more powerful runes and bonuses!";
+							document.getElementById("tutorialScreen").style.display = "inline";
+						}
 					}
 					totalRecipes++;
 					document.getElementById("totalRecipes").innerHTML = totalRecipes;
@@ -678,12 +700,39 @@ function combine() {
 				if (totalRunes >= 100 && document.getElementById("x1").style.display != "inline") {
 					document.getElementById("x1").style.display = "inline";
 					document.getElementById("x2").style.display = "inline";
+					if (tutorialEnabled) {
+						prevScreen = "combine";
+						currentScreen = "tutorial";
+						document.getElementById("tutText").innerHTML = "Looks like things are coming along.<br>" + 
+						"With these new buttons, you can combine more runes at once! Keep in mind you'll need lots of the higher " + 
+						"order runes to do so. You can swap between these buttons using the left and right arrow keys as well.<br><br>" + 
+						"And don't worry about wasting runes. Any new recipe unlocks will only cost one of each rune, regardless of how many " + 
+						"you've inserted into the rune combiner.<br><br>" + 
+						"Before you go, here's a free hint! <br>To unlock a very powerful tool, you'll need to use 1 of each of the first 4 runes together!";
+						document.getElementById("tutorialScreen").style.display = "inline";
+					}
 				}
 				if (totalRunes >= 1000 && document.getElementById("x5").style.display != "inline") {
 					document.getElementById("x5").style.display = "inline";
+					if (tutorialEnabled) {
+						prevScreen = "combine";
+						currentScreen = "tutorial";
+						var hint = increaseBaseRune[0].split("+");
+						document.getElementById("tutText").innerHTML = "Looking for a new hint?<br><br>You can unlock a powerful upgrade with the following recipe: <br>" + 
+						getRuneName(parseInt(hint[0])) + "+" + getRuneName(parseInt(hint[1])) + "+" + getRuneName(parseInt(hint[2])) + "+" + getRuneName(parseInt(hint[3])) + "!";
+						document.getElementById("tutorialScreen").style.display = "inline";
+					}
 				}
 				if (totalRunes >= 10000 && document.getElementById("x10").style.display != "inline") {
 					document.getElementById("x10").style.display = "inline";
+					if (tutorialEnabled) {
+						prevScreen = "combine";
+						currentScreen = "tutorial";
+						var hint = increaseCombineBase[2].split("+");
+						document.getElementById("tutText").innerHTML = "Looking for a new hint?<br><br>You can unlock a powerful upgrade with the following recipe: <br>" + 
+						getRuneName(parseInt(hint[0])) + "+" + getRuneName(parseInt(hint[1])) + "+" + getRuneName(parseInt(hint[2])) + "+" + getRuneName(parseInt(hint[3])) + "!";
+						document.getElementById("tutorialScreen").style.display = "inline";
+					}
 				}
 				if (totalRunes >= 100000 && document.getElementById("x100").style.display != "inline") {
 					document.getElementById("x100").style.display = "inline";
@@ -1165,46 +1214,54 @@ function autoCombine(base) {
 }
 
 function goAltar() {
-	currentScreen = "altar";
-	document.getElementById("combineAltar").style.display = "none";
-	document.getElementById("recipeScreen").style.display = "none";
-	document.getElementById("runeAltar").style.display = "inline";
-	document.getElementById("versionScreen").style.display = "none";
-	document.getElementById("altar").style.backgroundColor = "lightGrey";
-	document.getElementById("altar").style.borderColor = "lightGrey";
-	for (i = 0; i < 24; i++) {
+	if (currentScreen != "tutorial") {
+		currentScreen = "altar";
+		document.getElementById("combineAltar").style.display = "none";
+		document.getElementById("recipeScreen").style.display = "none";
+		document.getElementById("runeAltar").style.display = "inline";
+		document.getElementById("versionScreen").style.display = "none";
+		document.getElementById("altar").style.backgroundColor = "lightGrey";
+		document.getElementById("altar").style.borderColor = "lightGrey";
+		for (i = 0; i < 24; i++) {
 			var borderID = "rune" + i;
 			document.getElementById(borderID).style.borderStyle = "none";
 		}
+	}
 }
 
 function goCombine() {
-	currentScreen = "combine";
-	document.getElementById("runeAltar").style.display = "none";
-	document.getElementById("recipeScreen").style.display = "none";
-	document.getElementById("versionScreen").style.display = "none";
-	document.getElementById("combineAltar").style.display = "inline";
-	document.getElementById("combine").style.backgroundColor = "lightGrey";
-	document.getElementById("combine").style.borderColor = "lightGrey";
-	for (i = 0; i < 24; i++) {
-			var borderID = "rune" + i;
-			document.getElementById(borderID).style.borderStyle = "none";
+	if (currentScreen != "tutorial") {
+		currentScreen = "combine";
+		document.getElementById("runeAltar").style.display = "none";
+		document.getElementById("recipeScreen").style.display = "none";
+		document.getElementById("versionScreen").style.display = "none";
+		document.getElementById("combineAltar").style.display = "inline";
+		document.getElementById("combine").style.backgroundColor = "lightGrey";
+		document.getElementById("combine").style.borderColor = "lightGrey";
+		for (i = 0; i < 24; i++) {
+				var borderID = "rune" + i;
+				document.getElementById(borderID).style.borderStyle = "none";
 		}
+	}
 }
 
 function goRecipe() {
-	currentScreen = "recipe";
-	document.getElementById("runeAltar").style.display = "none";
-	document.getElementById("combineAltar").style.display = "none";
-	document.getElementById("versionScreen").style.display = "none";
-	document.getElementById("recipeScreen").style.display = "inline";
-	document.getElementById("recipe").style.backgroundColor = "lightGrey";
-	document.getElementById("recipe").style.borderColor = "lightGrey";
+	if (currentScreen != "tutorial") {
+		currentScreen = "recipe";
+		document.getElementById("runeAltar").style.display = "none";
+		document.getElementById("combineAltar").style.display = "none";
+		document.getElementById("versionScreen").style.display = "none";
+		document.getElementById("recipeScreen").style.display = "inline";
+		document.getElementById("recipe").style.backgroundColor = "lightGrey";
+		document.getElementById("recipe").style.borderColor = "lightGrey";
+	}
 }
 
 function goVersion() {
-	currentScreen = "version";
-	document.getElementById("versionScreen").style.display = "inline";
+	if (currentScreen != "tutorial") {
+		currentScreen = "version";
+		document.getElementById("versionScreen").style.display = "inline";
+	}
 }
 
 function displayMessage(message, y) {
@@ -1264,6 +1321,7 @@ function showFailures() {
 }
 
 function closeTutorial() {
+	currentScreen = prevScreen;
 	document.getElementById("tutorialScreen").style.display = "none";
 }
 

@@ -343,14 +343,15 @@ body {
 
 #tutorialScreen {
 	position: absolute;
-	left: 10%;
-	top: 10%;
+	left: 12.5%;
+	top: 12.5%;
 	width: 75%;
 	height: 75%;
 	z-index: 2;
 	background-color: black;
 	color: white;
 	font-size: 24px;
+	text-align: center;
 }
 
 #versionScreen {
