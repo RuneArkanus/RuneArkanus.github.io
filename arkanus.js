@@ -52,6 +52,8 @@ var increaseCritChance = [];	//5, 10, 25, 50		2-4
 var increaseCritMult = [];		//1, 10, 40, 120	4
 var increasePresentMult = [];	//1, 3, 5, 7		4
 var givePresents = [];			//10, 100, 400, 1200 2-4
+var hints = [];
+hints.push("0+1+2+3");
 
 //Store all the default recipes
 for (i = 0; i < 24; i++) {
@@ -558,23 +560,36 @@ function selectRune(runeID) {
 				}
 			}
 		}
-	} else if (currentScreen == "recipe")
-	{
+	} else if (currentScreen == "recipe" && runeID <= highestRune) {
 		for (i = 0; i < 24; i++) {
 			var borderID = "rune" + i;
 			document.getElementById(borderID).style.borderStyle = "none";
 		}
 		elem.style.borderStyle = "solid";
 		document.getElementById("log").innerHTML = "";
-		for (i = 0; i < recipes.length; i++) {
-			var parts = recipes[i].split("+");
-			if (parts[0] == runeID) {
-				for (j = 0; j < parts.length; j++) {
-					var runeName = parseInt(parts[j]);
-					runeName = getRuneName(runeName);
-					document.getElementById("log").innerHTML += runeName + " ";
-				}
+		
+		for (i = 0; i <= runeID; i++) {
+			var recipe2 = "" + i + "+" + runeID;
+			document.getElementById("log").innerHTML += getRuneName(i) + "+" + getRuneName(runeID);
+			if (failedRecipes.includes(recipe2)) document.getElementById("log").innerHTML += " &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRECIPE FAILED";
+			else if (recipes.includes(recipe2)) document.getElementById("log").innerHTML += " &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRECIPE SUCCEEDED!";
+			else if (hints.includes(recipe2))document.getElementById("log").innerHTML += " &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp!!!!!!!!";
+			document.getElementById("log").innerHTML += "<br>";
+			for (j = 0; j <= i; j++) {
+				var recipe3 = "" + j + "+" + i + "+" + runeID;
+				document.getElementById("log").innerHTML += getRuneName(j) + "+" + getRuneName(i) + "+" + getRuneName(runeID);
+				if (failedRecipes.includes(recipe3)) document.getElementById("log").innerHTML += " &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRECIPE FAILED";
+				else if (recipes.includes(recipe3)) document.getElementById("log").innerHTML += " &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRECIPE SUCCEEDED!";
+				else if (hints.includes(recipe3))document.getElementById("log").innerHTML += " &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp!!!!!!!!";
 				document.getElementById("log").innerHTML += "<br>";
+				for (k = 0; k <= j; k++) {
+					var recipe4 = "" + k + "+" + j + "+" + i + "+" + runeID;
+					document.getElementById("log").innerHTML += getRuneName(k) + "+" + getRuneName(j) + "+" + getRuneName(i) + "+" + getRuneName(runeID);
+					if (failedRecipes.includes(recipe4)) document.getElementById("log").innerHTML += " &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRECIPE FAILED";
+					else if (recipes.includes(recipe4)) document.getElementById("log").innerHTML += " &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRECIPE SUCCEEDED!";
+					else if (hints.includes(recipe4))document.getElementById("log").innerHTML += " &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp!!!!!!!!";
+					document.getElementById("log").innerHTML += "<br>";
+				}
 			}
 		}
 	}
@@ -724,7 +739,7 @@ function combine() {
 							prevScreen = "combine";
 							currentScreen = "tutorial";
 							document.getElementById("tutText").innerHTML = "From the recipes page, click a rune to see all the combinations " + 
-								"you've tried that begin with that rune. (THIS IS NOT COMPLETE! The recipes page needs a lot of work still.)<br><br>" + 
+								"you've tried up to that rune. <br>(The recipes page is still being worked on.)<br><br>" + 
 								"The first 9 runes can be added to the rune combiner using the keyboard shortcuts (1-9), and then combined using (Spacebar). Remove all runes in the combiner by pressing (X).<br><br>" + 
 								"For a quick boost, try combining 4 of the same rune! This is one of the 5 universal recipes.<br><br>" + 
 								"Try all sorts of combinations to get more powerful runes and bonuses!";
@@ -773,6 +788,7 @@ function combine() {
 						prevScreen = "combine";
 						currentScreen = "tutorial";
 						var hint = increaseBaseRune[0].split("+");
+						hints.push(increaseBaseRune[0]);
 						document.getElementById("tutText").innerHTML = "Looking for a new hint?<br><br>You can unlock a powerful upgrade with the following recipe: <br>" + 
 						getRuneName(parseInt(hint[0])) + "+" + getRuneName(parseInt(hint[1])) + "+" + getRuneName(parseInt(hint[2])) + "+" + getRuneName(parseInt(hint[3])) + "!";
 						document.getElementById("tutorialScreen").style.display = "inline";
@@ -784,6 +800,7 @@ function combine() {
 						prevScreen = "combine";
 						currentScreen = "tutorial";
 						var hint = increaseCombineBase[2].split("+");
+						hints.push(increaseCombineBase[2]);
 						document.getElementById("tutText").innerHTML = "Looking for a new hint?<br><br>You can unlock a powerful upgrade with the following recipe: <br>" + 
 						getRuneName(parseInt(hint[0])) + "+" + getRuneName(parseInt(hint[1])) + "+" + getRuneName(parseInt(hint[2])) + "+" + getRuneName(parseInt(hint[3])) + "!";
 						document.getElementById("tutorialScreen").style.display = "inline";
@@ -796,6 +813,8 @@ function combine() {
 						currentScreen = "tutorial";
 						var hint1 = increasePresentMult[1].split("+");
 						var hint2 = increasePresentMult[2].split("+");
+						hints.push(increasePresentMult[1]);
+						hints.push(increasePresentMult[2]);
 						document.getElementById("tutText").innerHTML = "Bring out your hints!<br><br>A two-for-one special! Have you tried either of these recipes? <br><br>" + 
 						getRuneName(parseInt(hint1[0])) + "+" + getRuneName(parseInt(hint1[1])) + "+" + getRuneName(parseInt(hint1[2])) + "+" + getRuneName(parseInt(hint1[3])) + "!<br><br>" + 
 						getRuneName(parseInt(hint2[0])) + "+" + getRuneName(parseInt(hint2[1])) + "+" + getRuneName(parseInt(hint2[2])) + "+" + getRuneName(parseInt(hint2[3])) + "!";
@@ -809,6 +828,9 @@ function combine() {
 						var hint1 = increaseCritMult[2].split("+");
 						var hint2 = increaseCritMult[3].split("+");
 						var hint3 = increaseCritMult[4].split("+");
+						hints.push(increaseCritMult[2]);
+						hints.push(increaseCritMult[3]);
+						hints.push(increaseCritMult[4]);
 						currentScreen = "tutorial";
 						document.getElementById("tutText").innerHTML = "Hintception!<br><br>" + 
 						getRuneName(parseInt(hint1[0])) + "+" + getRuneName(parseInt(hint1[1])) + "+" + getRuneName(parseInt(hint1[2])) + "+" + getRuneName(parseInt(hint1[3])) + "!<br><br>" + 
@@ -1355,6 +1377,7 @@ function goCombine() {
 function goRecipe() {
 	if (currentScreen != "tutorial") {
 		currentScreen = "recipe";
+		document.getElementById("log").innerHTML = "";
 		document.getElementById("runeAltar").style.display = "none";
 		document.getElementById("combineAltar").style.display = "none";
 		document.getElementById("versionScreen").style.display = "none";
@@ -1417,14 +1440,6 @@ function displayMessage(message, y) {
 			}
 		}, 200);
 	}
-}
-
-function showSuccesses() {
-	
-}
-
-function showFailures() {
-	
 }
 
 function closeTutorial() {
@@ -1707,15 +1722,15 @@ document.onkeypress = function(e) {
 		else if (e.which == 114 && document.getElementById("recipe").style.display == "inline") goRecipe();
 		else if (e.which == 120 && document.getElementById("recipe").style.display == "inline") removeAll();
 		else if (e.which == 118) goVersion();
-		else if (e.which == 49 && currentScreen == "combine") selectRune(0);
-		else if (e.which == 50 && currentScreen == "combine") selectRune(1);
-		else if (e.which == 51 && currentScreen == "combine") selectRune(2);
-		else if (e.which == 52 && currentScreen == "combine") selectRune(3);
-		else if (e.which == 53 && currentScreen == "combine") selectRune(4);
-		else if (e.which == 54 && currentScreen == "combine") selectRune(5);
-		else if (e.which == 55 && currentScreen == "combine") selectRune(6);
-		else if (e.which == 56 && currentScreen == "combine") selectRune(7);
-		else if (e.which == 57 && currentScreen == "combine") selectRune(8);
+		else if (e.which == 49 && (currentScreen == "combine" || currentScreen == "recipe")) selectRune(0);
+		else if (e.which == 50 && (currentScreen == "combine" || currentScreen == "recipe")) selectRune(1);
+		else if (e.which == 51 && (currentScreen == "combine" || currentScreen == "recipe")) selectRune(2);
+		else if (e.which == 52 && (currentScreen == "combine" || currentScreen == "recipe")) selectRune(3);
+		else if (e.which == 53 && (currentScreen == "combine" || currentScreen == "recipe")) selectRune(4);
+		else if (e.which == 54 && (currentScreen == "combine" || currentScreen == "recipe")) selectRune(5);
+		else if (e.which == 55 && (currentScreen == "combine" || currentScreen == "recipe")) selectRune(6);
+		else if (e.which == 56 && (currentScreen == "combine" || currentScreen == "recipe")) selectRune(7);
+		else if (e.which == 57 && (currentScreen == "combine" || currentScreen == "recipe")) selectRune(8);
 		//else console.log(e.which);
 	}
 
