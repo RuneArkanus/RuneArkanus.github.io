@@ -34,7 +34,7 @@ var combineBase = 0;
 var baseRune = 0;
 var critChance = 0;
 var critMult = 2;
-var presentMult = 10;
+var presentMult = 5;
 var fading = false;
 var fading2 = false;
 var messages = [];
@@ -469,22 +469,12 @@ for (i = 0; i < 20; i++) {
 
 
 
-var debugMode = false;
 
 
 function setup() {
 	//change to load?
-	if (debugMode) {
-		for (i = 0; i < 23; i++) {
-			var x = "rune" + i;
-			document.getElementById(x).setAttribute("value", 1000);
-			x = "numRune" + i;
-			document.getElementById(x).innerHTML = "1000";
-		}
-		document.getElementById("combine2").style.display = "inline";
-		document.getElementById("combine3").style.display = "inline";
-		maxSelected = 4;
-	}
+	loadGame();
+	
 }
 
 function makeRune(num, base) {
@@ -715,7 +705,7 @@ function combine() {
 				var newElem = document.getElementById(newRune);
 				var newNum = parseInt(newElem.getAttribute("value"));
 				
-				if (newElem.getAttribute("value") == null) {
+				if (newElem.getAttribute("value") == null || newElem.getAttribute("value") == "NaN") {
 					//Making the first of a new rune tier
 					newNum = 0;
 					newElem.setAttribute("src", "images/rune" + (val1 + 1) + ".png");
@@ -799,9 +789,27 @@ function combine() {
 				}
 				if (totalRunes >= 100000 && document.getElementById("x100").style.display != "inline") {
 					document.getElementById("x100").style.display = "inline";
+					if (tutorialEnabled) {
+						prevScreen = "combine";
+						currentScreen = "tutorial";
+						var hint1 = increasePresentMult[1].split("+");
+						var hint2 = increasePresentMult[2].split("+");
+						document.getElementById("tutText").innerHTML = "Bring out your hints!<br><br>A two-for-one special! Have you tried either of these recipes? <br><br>" + 
+						getRuneName(parseInt(hint1[0])) + "+" + getRuneName(parseInt(hint1[1])) + "+" + getRuneName(parseInt(hint1[2])) + "+" + getRuneName(parseInt(hint1[3])) + "!<br><br>" + 
+						getRuneName(parseInt(hint2[0])) + "+" + getRuneName(parseInt(hint2[1])) + "+" + getRuneName(parseInt(hint2[2])) + "+" + getRuneName(parseInt(hint2[3])) + "!";
+						document.getElementById("tutorialScreen").style.display = "inline";
+					}
 				}
 				if (totalRunes >= 1000000 && document.getElementById("x1000").style.display != "inline") {
 					document.getElementById("x1000").style.display = "inline";
+					if (tutorialEnabled) {
+						prevScreen = "combine";
+						currentScreen = "tutorial";
+						document.getElementById("tutText").innerHTML = "Those last few hints should probably have been enough for the current version. " + 
+						"If you're this far and haven't used them, do so! They'll increase the strength of many other recipes!<br><br>" + 
+						"If you really used them and are still struggling, let me know on reddit/discord, so I can fix the game's balance.";
+						document.getElementById("tutorialScreen").style.display = "inline";
+					}
 				}
 				if (totalRunes >= 10000000 && document.getElementById("x10000").style.display != "inline") {
 					document.getElementById("x10000").style.display = "inline";
@@ -1065,7 +1073,7 @@ function combine() {
 				displayMessage("Crit Multiplier increased by 1!");
 			} else if (increasePresentMult.includes(recipeID)) {
 				//Increase the Present Multiplier
-				presentMult *= 10;
+				presentMult *= 5;
 				document.getElementById("presentMult").innerHTML = presentMult;
 				displayMessage("Present Multiplier increased by 10x!");
 			} else if (val1 == 0 && val2 == 1 && val3 == 2 && val4 == 3) {
@@ -1407,6 +1415,183 @@ function showFailures() {
 function closeTutorial() {
 	currentScreen = prevScreen;
 	document.getElementById("tutorialScreen").style.display = "none";
+}
+
+function saveGame() {
+	var save = {
+		currentRunes : currentRunes,
+		totalRunes : totalRunes,
+		combinations : combinations,
+		totalRecipes : totalRecipes,
+		time : time,
+		altarMultiplier : altarMultiplier,
+		combineMultiplier : combineMultiplier,
+		selected : selected,
+		highestRune : highestRune,
+		combineArray : combineArray,
+		recipes : recipes,
+		failedReipes : failedReipes,
+		recipeFails : recipeFails,
+		baseRps : baseRps,
+		rps : rps,
+		autoSpeed : autoSpeed,
+		combineBase :  combineBase,
+		baseRune : baseRune,
+		critChance : critChance,
+		critMult : critMult,
+		presentMult : presentMult,
+		tooltipsOn : tooltipsOn,
+		tutorialEnabled : tutorialEnabled,
+		allRecipes: allRecipes,
+		increaseCombineMult : increaseCombineMult,
+		increaseAltarMult : increaseAltarMult,
+		increaseRps : increaseRps,
+		increaseAutoSpeed : increaseAutoSpeed,
+		increaseCombineBase : increaseCombineBase,
+		increaseBaseRune : increaseBaseRune,
+		increaseCritChance : increaseCritChance,
+		increaseCritMult : increaseCritMult,
+		increasePresentMult : increasePresentMult,
+		givePresents : givePresents,
+		runes0 : document.getElementById("rune0").getAttribute("value"), 
+		runes1 : document.getElementById("rune1").getAttribute("value"), 
+		runes2 : document.getElementById("rune2").getAttribute("value"), 
+		runes3 : document.getElementById("rune3").getAttribute("value"), 
+		runes4 : document.getElementById("rune4").getAttribute("value"), 
+		runes5 : document.getElementById("rune5").getAttribute("value"), 
+		runes6 : document.getElementById("rune6").getAttribute("value"), 
+		runes7 : document.getElementById("rune7").getAttribute("value"), 
+		runes8 : document.getElementById("rune8").getAttribute("value"), 
+		runes9 : document.getElementById("rune9").getAttribute("value"), 
+		runes10 : document.getElementById("rune10").getAttribute("value"), 
+		runes11 : document.getElementById("rune11").getAttribute("value"), 
+		runes12 : document.getElementById("rune12").getAttribute("value"), 
+		runes13 : document.getElementById("rune13").getAttribute("value"), 
+		runes14 : document.getElementById("rune14").getAttribute("value"), 
+		runes15 : document.getElementById("rune15").getAttribute("value"), 
+		runes16 : document.getElementById("rune16").getAttribute("value"), 
+		runes17 : document.getElementById("rune17").getAttribute("value"), 
+		runes18 : document.getElementById("rune18").getAttribute("value"), 
+		runes19 : document.getElementById("rune19").getAttribute("value"), 
+		runes20 : document.getElementById("rune20").getAttribute("value"), 
+		runes21 : document.getElementById("rune21").getAttribute("value"), 
+		runes22 : document.getElementById("rune22").getAttribute("value"), 
+		runes23 : document.getElementById("rune23").getAttribute("value")
+	}
+	localStorage.setItem("ArkanusSave", JSON.stringify(save));
+}
+
+function loadGame() {
+	var save = JSON.parse(localStorage.getItem("ArkanusSave"));
+	if (save != null) {
+		if (typeof save.currentRunes != "undefined") currentRunes = save.currentRunes;
+		if (typeof save.totalRunes != "undefined") totalRunes = save.totalRunes;
+		if (typeof save.combinations != "undefined") combinations = save.combinations;
+		if (typeof save.totalRecipes != "undefined") totalRecipes = save.totalRecipes;
+		if (typeof save.time != "undefined") time = save.time;
+		if (typeof save.altarMultiplier != "undefined") altarMultiplier = save.altarMultiplier;
+		if (typeof save.combineMultiplier != "undefined") combineMultiplier = save.combineMultiplier;
+		if (typeof save.selected != "undefined") selected = save.selected;
+		if (typeof save.highestRune != "undefined") highestRune = save.highestRune;
+		if (typeof save.combineArray != "undefined") combineArray = save.combineArray;
+		if (typeof save.recipes != "undefined") recipes = save.recipes;
+		if (typeof save.failedReipes != "undefined") failedReipes = save.failedReipes;
+		if (typeof save.recipeFails != "undefined") recipeFails = save.recipeFails;
+		if (typeof save.baseRps != "undefined") baseRps = save.baseRps;
+		if (typeof save.rps != "undefined") rps = save.rps;
+		if (typeof save.autoSpeed != "undefined") autoSpeed = save.autoSpeed;
+		if (typeof save.combineBase != "undefined") combineBase = save.combineBase;
+		if (typeof save.baseRune != "undefined") baseRune = save.baseRune;
+		if (typeof save.critChance != "undefined") critChance = save.critChance;
+		if (typeof save.critMult != "undefined") critMult = save.critMult;
+		if (typeof save.presentMult != "undefined") presentMult = save.presentMult;
+		if (typeof save.tooltipsOn != "undefined") tooltipsOn = save.tooltipsOn;
+		if (typeof save.tutorialEnabled != "undefined") tutorialEnabled = save.tutorialEnabled;
+		if (typeof save.allRecipes != "undefined") allRecipes = save.allRecipes;
+		if (typeof save.increaseCombineMult != "undefined") increaseCombineMult = save.increaseCombineMult;
+		if (typeof save.increaseAltarMult != "undefined") increaseAltarMult = save.increaseAltarMult;
+		if (typeof save.increaseRps != "undefined") increaseRps = save.increaseRps;
+		if (typeof save.increaseAutoSpeed != "undefined") increaseAutoSpeed = save.increaseAutoSpeed;
+		if (typeof save.increaseCombineBase != "undefined") increaseCombineBase = save.increaseCombineBase;
+		if (typeof save.increaseBaseRune != "undefined") increaseBaseRune = save.increaseBaseRune;
+		if (typeof save.increaseCritChance != "undefined") increaseCritChance = save.increaseCritChance;
+		if (typeof save.increaseCritMult != "undefined") increaseCritMult = save.increaseCritMult;
+		if (typeof save.increasePresentMult != "undefined") increasePresentMult = save.increasePresentMult;
+		if (typeof save.givePresents != "undefined") givePresents = save.givePresents;
+		if (typeof save.runes0 != "undefined") document.getElementById("rune0").setAttribute("value", parseInt(save.runes0));
+		if (typeof save.runes1 != "undefined") document.getElementById("rune1").setAttribute("value", parseInt(save.runes1));
+		if (typeof save.runes2 != "undefined") document.getElementById("rune2").setAttribute("value", parseInt(save.runes2));
+		if (typeof save.runes3 != "undefined") document.getElementById("rune3").setAttribute("value", parseInt(save.runes3));
+		if (typeof save.runes4 != "undefined") document.getElementById("rune4").setAttribute("value", parseInt(save.runes4));
+		if (typeof save.runes5 != "undefined") document.getElementById("rune5").setAttribute("value", parseInt(save.runes5));
+		if (typeof save.runes6 != "undefined") document.getElementById("rune6").setAttribute("value", parseInt(save.runes6));
+		if (typeof save.runes7 != "undefined") document.getElementById("rune7").setAttribute("value", parseInt(save.runes7));
+		if (typeof save.runes8 != "undefined") document.getElementById("rune8").setAttribute("value", parseInt(save.runes8));
+		if (typeof save.runes9 != "undefined") document.getElementById("rune9").setAttribute("value", parseInt(save.runes9));
+		if (typeof save.runes10 != "undefined") document.getElementById("rune10").setAttribute("value", parseInt(save.runes10));
+		if (typeof save.runes11 != "undefined") document.getElementById("rune11").setAttribute("value", parseInt(save.runes11));
+		if (typeof save.runes12 != "undefined") document.getElementById("rune12").setAttribute("value", parseInt(save.runes12));
+		if (typeof save.runes13 != "undefined") document.getElementById("rune13").setAttribute("value", parseInt(save.runes13));
+		if (typeof save.runes14 != "undefined") document.getElementById("rune14").setAttribute("value", parseInt(save.runes14));
+		if (typeof save.runes15 != "undefined") document.getElementById("rune15").setAttribute("value", parseInt(save.runes15));
+		if (typeof save.runes16 != "undefined") document.getElementById("rune16").setAttribute("value", parseInt(save.runes16));
+		if (typeof save.runes17 != "undefined") document.getElementById("rune17").setAttribute("value", parseInt(save.runes17));
+		if (typeof save.runes18 != "undefined") document.getElementById("rune18").setAttribute("value", parseInt(save.runes18));
+		if (typeof save.runes19 != "undefined") document.getElementById("rune19").setAttribute("value", parseInt(save.runes19));
+		if (typeof save.runes20 != "undefined") document.getElementById("rune20").setAttribute("value", parseInt(save.runes20));
+		if (typeof save.runes21 != "undefined") document.getElementById("rune21").setAttribute("value", parseInt(save.runes21));
+		if (typeof save.runes22 != "undefined") document.getElementById("rune22").setAttribute("value", parseInt(save.runes22));
+		if (typeof save.runes23 != "undefined") document.getElementById("rune23").setAttribute("value", parseInt(save.runes23));
+		
+		document.getElementById("tutorialScreen").style.display = "none";
+		currentScreen = "altar";
+		for (i = 0; i < 12; i++) {
+			var id = document.getElementById("rune" + i);
+			if (id.getAttribute("value") != "NaN") {
+				id.setAttribute("src", "images/rune" + i + ".png");
+				document.getElementById("numRune" + i).innerHTML = enumerate(parseInt(id.getAttribute("value")));
+			}
+		}
+		document.getElementById("currentRunes").innerHTML = enumerate(currentRunes);
+		document.getElementById("totalCombinations").innerHTML = enumerate(combinations);
+		document.getElementById("totalRecipes").innerHTML = totalRecipes;
+		document.getElementById("altarMultiplier").innerHTML = altarMultiplier;
+		document.getElementById("combineMultiplier").innerHTML = combineMultiplier;
+		document.getElementById("rps").innerHTML = rps;
+		document.getElementById("baseRune").innerHTML = getRuneName(baseRune);
+		document.getElementById("combineSpeed").innerHTML = autoSpeed;
+		document.getElementById("combineBase").innerHTML = getRuneName(combineBase);
+		document.getElementById("critChance").innerHTML = critChance;
+		document.getElementById("critMult").innerHTML = critMult;
+		document.getElementById("presentMult").innerHTML = presentMult;
+		if (totalRunes >= 10) document.getElementById("combine").style.display = "inline";
+		if (totalRunes >= 100) {
+			document.getElementById("x1").style.display = "inline";
+			document.getElementById("x2").style.display = "inline";
+		}
+		if (totalRunes >= 1000) document.getElementById("x5").style.display = "inline";
+		if (totalRunes >= 10000) document.getElementById("x10").style.display = "inline";
+		if (totalRunes >= 100000) document.getElementById("x100").style.display = "inline";
+		if (totalRunes >= 1000000) document.getElementById("x1000").style.display = "inline";
+		if (totalRunes >= 10000000) document.getElementById("x10000").style.display = "inline";
+		if (totalRunes >= 100000000) document.getElementById("x100000").style.display = "inline";
+		if (totalRecipes >= 1) {
+			document.getElementById("combine2").style.display = "inline";
+			document.getElementById("combine3").style.display = "inline";
+			document.getElementById("recipe").style.display = "inline";
+		}
+		if (recipes.includes("0+1+2+3")) {
+			document.getElementById("autoCombine").style.display = "inline";
+			document.getElementById("header3").style.display = "inline";
+		}
+		if (critChance >= 1) document.getElementById("header4").style.display = "inline";
+		goAltar();
+	}
+}
+	
+//Deletes the HTML5 local storage. 
+function deleteSave() {
+	localStorage.removeItem("ArkanusSave");
 }
 
 function gameWin() {
