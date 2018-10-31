@@ -1483,6 +1483,7 @@ function saveGame() {
 		increaseCritMult : increaseCritMult,
 		increasePresentMult : increasePresentMult,
 		givePresents : givePresents,
+		hints : hints,
 		runes0 : document.getElementById("rune0").getAttribute("value"), 
 		runes1 : document.getElementById("rune1").getAttribute("value"), 
 		runes2 : document.getElementById("rune2").getAttribute("value"), 
@@ -1549,6 +1550,7 @@ function loadGame() {
 		if (typeof save.increaseCritMult != "undefined") increaseCritMult = save.increaseCritMult;
 		if (typeof save.increasePresentMult != "undefined") increasePresentMult = save.increasePresentMult;
 		if (typeof save.givePresents != "undefined") givePresents = save.givePresents;
+		if (typeof save.hints != "undefined") hints = save.hints;
 		if (typeof save.runes0 != "undefined") document.getElementById("rune0").setAttribute("value", parseInt(save.runes0));
 		if (typeof save.runes1 != "undefined") document.getElementById("rune1").setAttribute("value", parseInt(save.runes1));
 		if (typeof save.runes2 != "undefined") document.getElementById("rune2").setAttribute("value", parseInt(save.runes2));
@@ -1619,7 +1621,7 @@ function loadGame() {
 		goAltar();
 	}
 }
-	
+
 //Deletes the HTML5 local storage. 
 function deleteSave() {
 	localStorage.removeItem("ArkanusSave");
