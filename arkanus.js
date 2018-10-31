@@ -592,6 +592,7 @@ function selectRune(runeID) {
 				}
 			}
 		}
+		document.getElementById("log").focus();
 	}
 }
 
@@ -1612,6 +1613,8 @@ function loadGame() {
 			document.getElementById("combine2").style.display = "inline";
 			document.getElementById("combine3").style.display = "inline";
 			document.getElementById("recipe").style.display = "inline";
+			document.getElementById("save").style.display = "inline";
+			document.getElementById("delete").style.display = "inline";
 		}
 		if (recipes.includes("0+1+2+3")) {
 			document.getElementById("autoCombine").style.display = "inline";
