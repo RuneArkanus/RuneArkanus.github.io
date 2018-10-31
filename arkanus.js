@@ -718,6 +718,8 @@ function combine() {
 						document.getElementById("combine2").style.display = "inline";
 						document.getElementById("combine3").style.display = "inline";
 						maxSelected = 4;
+						document.getElementById("save").style.display = "inline";
+						document.getElementById("delete").style.display = "inline";
 						if (tutorialEnabled) {
 							prevScreen = "combine";
 							currentScreen = "tutorial";
@@ -1492,6 +1494,7 @@ function saveGame() {
 		runes23 : document.getElementById("rune23").getAttribute("value")
 	}
 	localStorage.setItem("ArkanusSave", JSON.stringify(save));
+	displayMessage("Game Saved!");
 }
 
 function loadGame() {
@@ -1605,6 +1608,7 @@ function loadGame() {
 //Deletes the HTML5 local storage. 
 function deleteSave() {
 	localStorage.removeItem("ArkanusSave");
+	displayMessage("Save deleted.");
 }
 
 function gameWin() {

@@ -40,6 +40,7 @@
 			<button class="button" id="version" onclick="goVersion()">Version 0.1</button>
 			<button class="button hidden" id="save" onclick="saveGame()">Save</button>
 			<button class="button hidden" id="load" onclick="loadGame()">Load</button>
+			<button class="button hidden" id="delete" onclick="deleteSave()">Delete Save</button>
 		</div>
 	
 		<div id="leftRunes">
@@ -136,65 +137,65 @@
 		<div id="rightRunes">
 			<div class="tooltip">
 				<image class="rune" id="rune12" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext hidden">Irq</span>
+				<span class="tooltiptext hidden" id="text12">Irq</span>
 				</image>
 			</div>
 			<div class="tooltip">
 				<image class="rune" id="rune13" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext hidden">Isk</span>
+				<span class="tooltiptext hidden" id="text13">Isk</span>
 				</image>
 			</div>
 			<div class="tooltip">
 				<image class="rune" id="rune14" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext hidden">Ivl</span>
+				<span class="tooltiptext hidden" id="text14">Ivl</span>
 				</image>
 			</div>
 			<br><span class="col1" id="numRune12">0</span><span class="col2" id="numRune13">0</span><span class="col3" id="numRune14">0</span><br>
 			<div class="tooltip">
 				<image class="rune" id="rune15" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext hidden">Och</span>
+				<span class="tooltiptext hidden" id="text15">Och</span>
 				</image>
 			</div>
 			<div class="tooltip">
 				<image class="rune" id="rune16" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext hidden">Ont</span>
+				<span class="tooltiptext hidden" id="text16">Ont</span>
 				</image>
 			</div>
 			<div class="tooltip">
 				<image class="rune" id="rune17" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext hidden">Opp</span>
+				<span class="tooltiptext hidden" id="text17">Opp</span>
 				</image>
 			</div>
 			<br><span class="col1" id="numRune15">0</span><span class="col2" id="numRune16">0</span><span class="col3" id="numRune17">0</span><br>
 			<div class="tooltip2">
 				<image class="rune" id="rune18" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext2 hidden">Ort</span>
+				<span class="tooltiptext2 hidden" id="text18">Ort</span>
 				</image>
 			</div>
 			<div class="tooltip2">
 				<image class="rune" id="rune19" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext2 hidden">Ox</span>
+				<span class="tooltiptext2 hidden" id="text19">Ox</span>
 				</image>
 			</div>
 			<div class="tooltip2">
 				<image class="rune" id="rune20" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext2 hidden">Ugh</span>
+				<span class="tooltiptext2 hidden" id="text20">Ugh</span>
 				</image>
 			</div>
 			<br><span class="col1" id="numRune18">0</span><span class="col2" id="numRune19">0</span><span class="col3" id="numRune20">0</span><br>
 			<div class="tooltip2">
 				<image class="rune" id="rune21" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext2 hidden">Ujl</span>
+				<span class="tooltiptext2 hidden" id="text21">Ujl</span>
 				</image>
 			</div>
 			<div class="tooltip2">
 				<image class="rune" id="rune22" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext2 hidden">Url</span>
+				<span class="tooltiptext2 hidden" id="text22">Url</span>
 				</image>
 			</div>
 			<div class="tooltip2">
 				<image class="rune" id="rune23" type="image" src="images/unknownRune.png">
-				<span class="tooltiptext2 hidden">Uzn</span>
+				<span class="tooltiptext2 hidden" id="text23">Uzn</span>
 				</image>
 			</div>
 			<br><span class="col1" id="numRune21">0</span><span class="col2" id="numRune22">0</span><span class="col3" id="numRune23">0</span>
@@ -210,7 +211,9 @@
 		<div class="screen" id="tutorialScreen">
 			<div id="xButton" onclick="closeTutorial()">X</div>
 			<br><center><span id="tutText">Welcome to the mysteries of the Rune Arkanus. <br>
-			To get started, click the altar in the middle of the page to create runes!</span></center>
+			To get started, click the altar in the middle of the page to create runes!<br><br>
+			(The save functionality is still experimental. To win, combine 4 of the 12th rune (Ing). <br>
+			The right half of the game is still under construction!</span></center>
 		</div>
 		
 		<div class="screen hidden" id="versionScreen">
