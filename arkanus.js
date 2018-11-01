@@ -473,13 +473,210 @@ for (i = 0; i < 20; i++) {
 }
 
 
+//Recipes using runes 0-17
+for (i = 0; i < 40; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseCombineMult.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 20; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var newRecipe = r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseCombineMult.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 40; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseAltarMult.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 20; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var newRecipe = r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseAltarMult.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 80; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseRps.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 40; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 117
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var newRecipe = r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseRps.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 80; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseAutoSpeed.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 80; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var newRecipe = r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseAutoSpeed.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 40; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var newRecipe = r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseAutoSpeed.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 6; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseCombineBase.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 5; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseBaseRune.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 10; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseCritChance.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 10; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var newRecipe = r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseCritChance.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 5; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var newRecipe = r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseCritChance.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 40; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increaseCritMult.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 5; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		increasePresentMult.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 160; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var r4 = Math.floor(Math.random() * (r3 + 1)); //0 to r3
+	var newRecipe = r4 + "+" + r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		givePresents.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 160; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
+	var newRecipe = r3 + "+" + r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		givePresents.push(newRecipe);
+	} else i--;
+}
+for (i = 0; i < 80; i++) {
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
+	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
+	var newRecipe = r2 + "+" + r1;
+	if (!allRecipes.includes(newRecipe)) {
+		allRecipes.push(newRecipe);
+		givePresents.push(newRecipe);
+	} else i--;
+}
+
 
 
 
 function setup() {
-	//change to load?
 	loadGame();
-	
 }
 
 function makeRune(num, base) {
@@ -604,11 +801,11 @@ function autoSelectRune(autoRuneID) {
 	var autoId = "rune" + autoRuneID;
 	var autoElem = document.getElementById(autoId);
 	var autoVal = parseInt(autoElem.getAttribute("value"));
-	if (autoVal >= Math.pow((autoRuneID + 1), 2)) {
+	if (autoVal >= (2 * Math.pow((autoRuneID + 1), 2))) {
 		autoVal -= Math.pow((autoRuneID + 1), 2);
 		if (autoSelected == 0) autoCombine0 = autoRuneID;
 		else if (autoSelected == 1) autoCombine1 = autoRuneID;
-		else console.log("ERROR!");
+		else displayMessage("ERROR with autoSelectRune!");
 		autoElem.setAttribute("value", autoVal);
 		document.getElementById("numRune" + autoRuneID).innerHTML = enumerate(autoVal);
 		autoCombineArray.push(autoRuneID);
@@ -1067,7 +1264,7 @@ function combine() {
 			combinations++;
 			
 			if (increaseCombineMult.includes(recipeID)) {
-				if (val1 == 11) gameWin(); //Congrats!
+				if (val1 == 17) gameWin(); //Congrats!
 				//Increase Combine Multiplier
 				combineMultiplier += 1;
 				document.getElementById("combineMultiplier").innerHTML = enumerate(combineMultiplier);
@@ -1614,7 +1811,7 @@ function loadGame() {
 		
 		document.getElementById("tutorialScreen").style.display = "none";
 		currentScreen = "altar";
-		for (i = 0; i < 12; i++) {
+		for (i = 0; i < 24; i++) {
 			var id = document.getElementById("rune" + i);
 			if (id.getAttribute("value") != "NaN") {
 				id.setAttribute("src", "images/rune" + i + ".png");
