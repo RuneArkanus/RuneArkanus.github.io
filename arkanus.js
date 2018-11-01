@@ -1,4 +1,4 @@
-window.onload = setup;
+window.onload = setup();
 var $win = $(window);
 var $lay = $('#layout');
 var baseSize = {
