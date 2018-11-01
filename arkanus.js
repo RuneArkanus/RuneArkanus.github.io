@@ -10,6 +10,7 @@ var totalRunes = 0;
 var combinations = 0;
 var totalRecipes = 0;
 var time = 0;
+var date;
 var altarMultiplier = 1;
 var combineMultiplier = 1;
 var currentScreen = "tutorial";
@@ -37,7 +38,9 @@ var critMult = 2;
 var presentMult = 5;
 var fading = false;
 var fading2 = false;
+var fading3 = false;
 var messages = [];
+var messages2 = [];
 var tooltipsOn = true;
 var tutorialEnabled = true;
 
@@ -592,6 +595,7 @@ function selectRune(runeID) {
 				}
 			}
 		}
+		document.getElementById("log").innerHTML += "<br>";
 		document.getElementById("log").focus();
 	}
 }
@@ -768,7 +772,7 @@ function combine() {
 				document.getElementById("currentRunes").innerHTML = enumerate(currentRunes);
 				document.getElementById("totalCombinations").innerHTML = enumerate(combinations);
 				
-				if (totalRunes >= 200 && document.getElementById("x1").style.display != "inline") {
+				if (totalRunes >= 200 && document.getElementById("x1").style.display != "inline" && currentScreen != "tutorial") {
 					document.getElementById("x1").style.display = "inline";
 					document.getElementById("x2").style.display = "inline";
 					if (tutorialEnabled) {
@@ -783,7 +787,7 @@ function combine() {
 						document.getElementById("tutorialScreen").style.display = "inline";
 					}
 				}
-				if (totalRunes >= 1000 && document.getElementById("x5").style.display != "inline") {
+				if (totalRunes >= 1000 && document.getElementById("x5").style.display != "inline" && currentScreen != "tutorial") {
 					document.getElementById("x5").style.display = "inline";
 					if (tutorialEnabled) {
 						prevScreen = "combine";
@@ -795,7 +799,7 @@ function combine() {
 						document.getElementById("tutorialScreen").style.display = "inline";
 					}
 				}
-				if (totalRunes >= 10000 && document.getElementById("x10").style.display != "inline") {
+				if (totalRunes >= 10000 && document.getElementById("x10").style.display != "inline" && currentScreen != "tutorial") {
 					document.getElementById("x10").style.display = "inline";
 					if (tutorialEnabled) {
 						prevScreen = "combine";
@@ -807,7 +811,7 @@ function combine() {
 						document.getElementById("tutorialScreen").style.display = "inline";
 					}
 				}
-				if (totalRunes >= 100000 && document.getElementById("x100").style.display != "inline") {
+				if (totalRunes >= 100000 && document.getElementById("x100").style.display != "inline" && currentScreen != "tutorial") {
 					document.getElementById("x100").style.display = "inline";
 					if (tutorialEnabled) {
 						prevScreen = "combine";
@@ -822,7 +826,7 @@ function combine() {
 						document.getElementById("tutorialScreen").style.display = "inline";
 					}
 				}
-				if (totalRunes >= 1000000 && document.getElementById("x1000").style.display != "inline") {
+				if (totalRunes >= 1000000 && document.getElementById("x1000").style.display != "inline" && currentScreen != "tutorial") {
 					document.getElementById("x1000").style.display = "inline";
 					if (tutorialEnabled) {
 						prevScreen = "combine";
@@ -840,7 +844,7 @@ function combine() {
 						document.getElementById("tutorialScreen").style.display = "inline";
 					}
 				}
-				if (totalRunes >= 10000000 && document.getElementById("x10000").style.display != "inline") {
+				if (totalRunes >= 10000000 && document.getElementById("x10000").style.display != "inline" && currentScreen != "tutorial") {
 					document.getElementById("x10000").style.display = "inline";
 					if (tutorialEnabled) {
 						prevScreen = "combine";
@@ -851,7 +855,7 @@ function combine() {
 						document.getElementById("tutorialScreen").style.display = "inline";
 					}
 				}
-				if (totalRunes >= 100000000 && document.getElementById("x100000").style.display != "inline") {
+				if (totalRunes >= 100000000 && document.getElementById("x100000").style.display != "inline" && currentScreen != "tutorial") {
 					document.getElementById("x100000").style.display = "inline";
 				}
 				
@@ -1416,6 +1420,32 @@ function displayMessage(message, y) {
 				}
 			}, 200);
 		}
+	} else if (y == 3 && fading3) {
+		messages2.push(message);
+	} else if (y == 3 && !fading3) {
+		if (!fading3) {
+			fading3 = true;
+			document.getElementById("mess3").innerHTML = message;
+			var fadeTarget3 = document.getElementById("globalMessage");
+			fadeTarget3.style.display = "inline";
+			var fadeEffect3 = setInterval(function () {
+				if (!fadeTarget3.style.opacity) {
+					fadeTarget3.style.opacity = 1;
+				}
+				if (fadeTarget3.style.opacity > 0) {
+					fadeTarget3.style.opacity -= 0.1;
+				} else {
+					fadeTarget3.style.opacity = null;
+					document.getElementById("mess3").innerHTML = "";
+					clearInterval(fadeEffect3);
+					fading3 = false;
+					if (messages2.length > 0) {
+						message = messages2.shift();
+						displayMessage(message, 3);
+					}
+				}
+			}, 200);
+		}
 	} else if (fading) {
 		messages.push(message);
 	} else {
@@ -1449,15 +1479,19 @@ function closeTutorial() {
 }
 
 function saveGame() {
+	//var d = new Date();
+	date = Math.floor(Date.now() / 1000);
 	var save = {
 		currentRunes : currentRunes,
 		totalRunes : totalRunes,
 		combinations : combinations,
 		totalRecipes : totalRecipes,
 		time : time,
+		date : date,
 		altarMultiplier : altarMultiplier,
 		combineMultiplier : combineMultiplier,
 		selected : selected,
+		maxSelected : maxSelected,
 		highestRune : highestRune,
 		combineArray : combineArray,
 		recipes : recipes,
@@ -1511,7 +1545,7 @@ function saveGame() {
 		runes23 : document.getElementById("rune23").getAttribute("value")
 	}
 	localStorage.setItem("ArkanusSave", JSON.stringify(save));
-	displayMessage("Game Saved!");
+	displayMessage("Game Saved!", 3);
 }
 
 function loadGame() {
@@ -1522,9 +1556,11 @@ function loadGame() {
 		if (typeof save.combinations != "undefined") combinations = save.combinations;
 		if (typeof save.totalRecipes != "undefined") totalRecipes = save.totalRecipes;
 		if (typeof save.time != "undefined") time = save.time;
+		if (typeof save.date != "undefined") date = save.date;
 		if (typeof save.altarMultiplier != "undefined") altarMultiplier = save.altarMultiplier;
 		if (typeof save.combineMultiplier != "undefined") combineMultiplier = save.combineMultiplier;
 		if (typeof save.selected != "undefined") selected = save.selected;
+		if (typeof save.maxSelected != "undefined") maxSelected = save.maxSelected;
 		if (typeof save.highestRune != "undefined") highestRune = save.highestRune;
 		if (typeof save.combineArray != "undefined") combineArray = save.combineArray;
 		if (typeof save.recipes != "undefined") recipes = save.recipes;
@@ -1584,6 +1620,7 @@ function loadGame() {
 			if (id.getAttribute("value") != "NaN") {
 				id.setAttribute("src", "images/rune" + i + ".png");
 				document.getElementById("numRune" + i).innerHTML = enumerate(parseInt(id.getAttribute("value")));
+				if (tooltipsOn) document.getElementById("text" + i	).classList.remove("hidden");
 			}
 		}
 		document.getElementById("currentRunes").innerHTML = enumerate(currentRunes);
@@ -1620,15 +1657,18 @@ function loadGame() {
 			document.getElementById("autoCombine").style.display = "inline";
 			document.getElementById("header3").style.display = "inline";
 		}
-		if (critChance >= 1) document.getElementById("header4").style.display = "inline";
+		if (critChance >= 1 || presentMult > 5) document.getElementById("header4").style.display = "inline";
 		goAltar();
+		displayMessage("Game loaded", 3);
+		//var d = new Date();
+		displayMessage("You were offline for " + formatTime(date - Math.floor(Date.now() / 1000)), 3);
 	}
 }
 
 //Deletes the HTML5 local storage. 
 function deleteSave() {
 	localStorage.removeItem("ArkanusSave");
-	displayMessage("Save deleted.");
+	displayMessage("Save deleted.", 3);
 }
 
 function gameWin() {
@@ -1636,8 +1676,9 @@ function gameWin() {
 	currentScreen = "tutorial";
 	var gameTime = formatTime();
 	document.getElementById("tutText").innerHTML = "Game completed in " + gameTime + "!<br><br>" + 
+	"You created a total of " + enumerate(totalRunes) + " runes!<br><br>" + 
 	"You discovered " + (recipes.length - failedRecipes.length) + " recipes out of a total " + allRecipes.length + "!<br><br>" + 
-	"The full version of the game will include all 24 runes and many more reipies and features!<br><br>" + 
+	"The full version of the game will include all 24 runes and many more recipes and features!<br><br>" + 
 	"Please contact Nohmou on reddit or discord for information or to leave feedback.";
 	document.getElementById("xButton").style.display = "none";
 	document.getElementById("tutorialScreen").style.display = "inline";
@@ -1767,3 +1808,4 @@ function updateScale() {
 
 $(window).resize(updateScale);
 
+//Copyright Nohmou, 2018
