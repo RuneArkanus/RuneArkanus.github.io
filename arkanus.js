@@ -1762,6 +1762,7 @@ window.setInterval(function() {
 	time++;
 	if (rps > 0) makeRune(rps);
 	if (autoCombining) autoCombine();
+	if (time % 60 == 0) saveGame();
 }, 1000);
 
 document.onkeypress = function(e) {
