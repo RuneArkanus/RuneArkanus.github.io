@@ -48,13 +48,13 @@ var allRecipes = [];
 var increaseCombineMult = [];	//3, 15, 60, 180	3-4
 var increaseAltarMult = [];		//3, 15, 60, 180	3-4
 var increaseRps = [];			//3, 30, 120, 360	3-4
-var increaseAutoSpeed = [];		//5, 50, 200, 600	2-4
+var increaseAutoSpeed = [];		//5, 50, 180, 600	2-4
 var increaseCombineBase = [];	//2, 4, 6, 8		4
 var increaseBaseRune = [];		//1, 3, 5, 7		4
 var increaseCritChance = [];	//5, 10, 25, 50		2-4
 var increaseCritMult = [];		//1, 10, 40, 120	4
 var increasePresentMult = [];	//1, 3, 5, 7		4
-var givePresents = [];			//10, 100, 400, 1200 2-4
+var givePresents = [];			//10, 100, 360, 1200 2-4
 var hints = [];
 hints.push("0+1+2+3");
 
@@ -473,6 +473,7 @@ for (i = 0; i < 20; i++) {
 }
 
 
+
 //Recipes using runes 0-17
 for (i = 0; i < 40; i++) {
 	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
@@ -528,7 +529,7 @@ for (i = 0; i < 80; i++) {
 	} else i--;
 }
 for (i = 0; i < 40; i++) {
-	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 117
+	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
 	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
 	var r3 = Math.floor(Math.random() * (r2 + 1)); //0 to r2
 	var newRecipe = r3 + "+" + r2 + "+" + r1;
@@ -558,7 +559,7 @@ for (i = 0; i < 80; i++) {
 		increaseAutoSpeed.push(newRecipe);
 	} else i--;
 }
-for (i = 0; i < 40; i++) {
+for (i = 0; i < 20; i++) {
 	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
 	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
 	var newRecipe = r2 + "+" + r1;
@@ -662,7 +663,7 @@ for (i = 0; i < 160; i++) {
 		givePresents.push(newRecipe);
 	} else i--;
 }
-for (i = 0; i < 80; i++) {
+for (i = 0; i < 40; i++) {
 	var r1 = Math.floor(Math.random() * 6) + 12; //12 to 17
 	var r2 = Math.floor(Math.random() * (r1 + 1)); //0 to r1
 	var newRecipe = r2 + "+" + r1;
@@ -672,7 +673,7 @@ for (i = 0; i < 80; i++) {
 	} else i--;
 }
 
-
+console.log("recipes completed");
 
 
 function setup() {
