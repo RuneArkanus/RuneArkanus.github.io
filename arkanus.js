@@ -1479,8 +1479,7 @@ function closeTutorial() {
 }
 
 function saveGame() {
-	//var d = new Date();
-	date = Math.floor(Date.now() / 1000);
+	date = Date.now();
 	var save = {
 		currentRunes : currentRunes,
 		totalRunes : totalRunes,
@@ -1660,8 +1659,10 @@ function loadGame() {
 		if (critChance >= 1 || presentMult > 5) document.getElementById("header4").style.display = "inline";
 		goAltar();
 		displayMessage("Game loaded", 3);
-		//var d = new Date();
-		displayMessage("You were offline for " + formatTime(date - Math.floor(Date.now() / 1000)), 3);
+		var ti = Math.floor((Date.now() - date) / 1000);
+		makeRune(ti * rps);
+		displayMessage("You were offline for " + formatTime(ti), 3);
+		displayMessage("Your altar produced " + enumerate(ti * rps) + " of each rune up to " + getRuneName(baseRune) + "!", 3);
 	}
 }
 
@@ -1674,7 +1675,7 @@ function deleteSave() {
 function gameWin() {
 	prevScreen = "combine";
 	currentScreen = "tutorial";
-	var gameTime = formatTime();
+	var gameTime = formatTime(time);
 	document.getElementById("tutText").innerHTML = "Game completed in " + gameTime + "!<br><br>" + 
 	"You created a total of " + enumerate(totalRunes) + " runes!<br><br>" + 
 	"You discovered " + (recipes.length - failedRecipes.length) + " recipes out of a total " + allRecipes.length + "!<br><br>" + 
@@ -1688,8 +1689,9 @@ function gameWin() {
 	autoCombining = false;
 }
 
-function formatTime() {
-	var tempTime = time;
+function formatTime(t) {
+	if (t < 0) return "Invalid time";
+	var tempTime = t;
 	var seconds = tempTime % 60;
 	tempTime -= seconds;
 	tempTime /= 60;
