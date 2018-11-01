@@ -93,6 +93,19 @@ body {
 	height: 42%;
 	top: 33%;
 	left: 38.5%;
+	outline-style: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	-webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-ms-user-drag: none;
+	-o-user-drag: none;
+	user-drag: none;
 }
 
 #combineAltar {
@@ -107,9 +120,17 @@ body {
 .rune {
 	outline-style: none;
 	-webkit-user-select: none;
+	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+	-o-user-select: none;
 	user-select: none;
+	-webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-ms-user-drag: none;
+	-o-user-drag: none;
+	user-drag: none;
 	border-width: 1px;
 	width: 100%;
 	height: 90%;
