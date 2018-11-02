@@ -673,8 +673,6 @@ for (i = 0; i < 40; i++) {
 	} else i--;
 }
 
-console.log("recipes completed");
-
 
 function setup() {
 	loadGame();
@@ -1702,6 +1700,8 @@ function saveGame() {
 		critChance : critChance,
 		critMult : critMult,
 		presentMult : presentMult,
+		autoCombining : autoCombining,
+		combineX : combineX,
 		tooltipsOn : tooltipsOn,
 		tutorialEnabled : tutorialEnabled,
 		allRecipes: allRecipes,
@@ -1771,6 +1771,8 @@ function loadGame() {
 		if (typeof save.critChance != "undefined") critChance = save.critChance;
 		if (typeof save.critMult != "undefined") critMult = save.critMult;
 		if (typeof save.presentMult != "undefined") presentMult = save.presentMult;
+		if (typeof save.autoCombining != "undefined") autoCombining = save.autoCombining;
+		if (typeof save.combineX != "undefined") combineX = save.combineX;
 		if (typeof save.tooltipsOn != "undefined") tooltipsOn = save.tooltipsOn;
 		if (typeof save.tutorialEnabled != "undefined") tutorialEnabled = save.tutorialEnabled;
 		if (typeof save.allRecipes != "undefined") allRecipes = save.allRecipes;
@@ -1843,6 +1845,7 @@ function loadGame() {
 		if (totalRunes >= 1000000) document.getElementById("x1000").style.display = "inline";
 		if (totalRunes >= 10000000) document.getElementById("x10000").style.display = "inline";
 		if (totalRunes >= 100000000) document.getElementById("x100000").style.display = "inline";
+		setCombine(combineX);
 		if (totalRecipes >= 1) {
 			document.getElementById("combine2").style.display = "inline";
 			document.getElementById("combine3").style.display = "inline";
@@ -1854,6 +1857,7 @@ function loadGame() {
 			document.getElementById("autoCombine").style.display = "inline";
 			document.getElementById("header3").style.display = "inline";
 		}
+		if (autoCombining) toggleAuto();
 		if (critChance >= 1 || presentMult > 5) document.getElementById("header4").style.display = "inline";
 		goAltar();
 		displayMessage("Game loaded", 3);
