@@ -1290,8 +1290,8 @@ function combine() {
 			} else if (increaseCombineBase.includes(recipeID)) {
 				//Increase the Base Combine rune
 				combineBase++;
-				document.getElementById("combineBase").innerHTML = getRuneName(combineBase);
-				displayMessage("Auto-Combine now combines up to " + getRuneName(combineBase) + "!");
+				document.getElementById("combineBase").innerHTML = getRuneName(combineBase + 1);
+				displayMessage("Auto-Combine now combines up to " + getRuneName(combineBase + 1) + "!");
 			} else if (increaseBaseRune.includes(recipeID)) {
 				//Increase Base Rune from Altar
 				baseRune++;
@@ -1830,7 +1830,7 @@ function loadGame() {
 		document.getElementById("rps").innerHTML = rps;
 		document.getElementById("baseRune").innerHTML = getRuneName(baseRune);
 		document.getElementById("combineSpeed").innerHTML = autoSpeed;
-		document.getElementById("combineBase").innerHTML = getRuneName(combineBase);
+		document.getElementById("combineBase").innerHTML = getRuneName(combineBase + 1);
 		document.getElementById("critChance").innerHTML = critChance;
 		document.getElementById("critMult").innerHTML = critMult;
 		document.getElementById("presentMult").innerHTML = presentMult;
@@ -1857,7 +1857,10 @@ function loadGame() {
 			document.getElementById("autoCombine").style.display = "inline";
 			document.getElementById("header3").style.display = "inline";
 		}
-		if (autoCombining) toggleAuto();
+		if (autoCombining) {
+			toggleAuto();
+			toggleAuto();
+		}
 		if (critChance >= 1 || presentMult > 5) document.getElementById("header4").style.display = "inline";
 		goAltar();
 		displayMessage("Game loaded", 3);
